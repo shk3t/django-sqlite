@@ -18,7 +18,6 @@ def pytest_sessionstart(session):
     Path("db.sqlite3").unlink(missing_ok=True)
     subprocess.run(["python", "src/manage.py", "makemigrations", "main"])
     subprocess.run(["python", "src/manage.py", "migrate"])
-    shutil.rmtree("src/main/migrations")
 
     server_process = subprocess.Popen(["python", "src/manage.py", "runserver"])
 

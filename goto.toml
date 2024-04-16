@@ -1,0 +1,25 @@
+name = "Todos"
+language = "python"
+packages = ["django"]
+
+containerization = "docker"
+srcdir = "src"
+stubdir = "stubs"
+
+[models]
+description = "Implement two models: `Todo` and `Collection`"
+runtarget = "tests/test_models.py"
+injectfiles = ["main/models.py"]
+
+[crud]
+description = "Implement CRUD for two models: `Todo` and `Collection`"
+runtarget = "tests/test_crud.py"
+injectfiles = ["main/views.py"]
+
+["models and crud"]
+description = """
+    Implement models then implement CRUD.
+    Easy.
+"""
+runtarget = ""
+injectfiles = {models = "main/models.py", crud = "main/views.py"}
