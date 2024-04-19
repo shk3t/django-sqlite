@@ -1,0 +1,4 @@
+PORT=8223
+DEBUG=False
+SECRET_KEY='<5uP-:If\DePVR3Zh4wgHm4MaD;C6>_mv6~"R8OxCZi4e$£KVK'
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]

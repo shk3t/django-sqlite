@@ -6,17 +6,21 @@ containerization = "docker"
 srcdir = "src"
 stubdir = "stubs"
 
-[models]
+
+[[tasks]]
+name = "models"
 description = "Implement two models: `Todo` and `Collection`"
 runtarget = "tests/test_models.py"
 injectfiles = ["main/models.py"]
 
-[crud]
+[[tasks]]
+name = "crud"
 description = "Implement CRUD for two models: `Todo` and `Collection`"
 runtarget = "tests/test_crud.py"
 injectfiles = ["main/views.py"]
 
-["models and crud"]
+[[tasks]]
+name = "models and crud"
 description = """
     Implement models then implement CRUD.
     Easy.

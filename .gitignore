@@ -3,10 +3,6 @@
 .idea/
 pyrightconfig.json
 
-# Private data
-.env
-env.*
-
 # Python
 migrations/
 __pycache__/
