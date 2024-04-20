@@ -1,6 +1,6 @@
 name = "Todos"
 language = "python"
-packages = ["django"]
+modules = ["django"]
 
 containerization = "docker"
 srcdir = "src"
