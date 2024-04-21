@@ -6,7 +6,6 @@ containerization = "docker"
 srcdir = "src"
 stubdir = "stubs"
 
-
 [[tasks]]
 name = "models"
 description = "Implement two models: `Todo` and `Collection`"
@@ -21,9 +20,6 @@ injectfiles = ["main/views.py"]
 
 [[tasks]]
 name = "models and crud"
-description = """
-    Implement models then implement CRUD.
-    Easy.
-"""
-runtarget = ""
+description = """Implement models then implement CRUD.
+                 Easy."""
 injectfiles = {models = "main/models.py", crud = "main/views.py"}
