@@ -10,16 +10,16 @@ stubdir = "stubs"
 name = "models"
 description = "Implement two models: `Todo` and `Collection`"
 runtarget = "tests/test_models.py"
-injectfiles = ["main/models.py"]
+files = ["main/models.py"]
 
 [[tasks]]
 name = "crud"
 description = "Implement CRUD for two models: `Todo` and `Collection`"
 runtarget = "tests/test_crud.py"
-injectfiles = ["main/views.py"]
+files = ["main/views.py"]
 
 [[tasks]]
 name = "models and crud"
 description = """Implement models then implement CRUD.
                  Easy."""
-injectfiles = {models = "main/models.py", crud = "main/views.py"}
+files = {models = "main/models.py", crud = "main/views.py"}
