@@ -3,9 +3,10 @@ import shutil
 import subprocess
 import time
 from pathlib import Path
+import pytest
 
 import requests
-from tests.utils import HOST
+from tests.utils import DEVNULL, HOST, DEFAULT_STDOUT
 
 server_process: subprocess.Popen
 
@@ -16,16 +17,27 @@ def pytest_sessionstart(session):
     if os.path.isdir("src/main/migrations"):
         shutil.rmtree("src/main/migrations")
     Path("db.sqlite3").unlink(missing_ok=True)
-    subprocess.run(["python", "src/manage.py", "makemigrations", "main"])
-    subprocess.run(["python", "src/manage.py", "migrate"])
+    subprocess.run(
+        ["python", "src/manage.py", "makemigrations", "main"],
+        stdout=DEVNULL,
+        stderr=DEVNULL,
+    )
+    subprocess.run(
+        ["python", "src/manage.py", "migrate"], stdout=DEVNULL, stderr=DEVNULL
+    )
 
-    server_process = subprocess.Popen(["python", "src/manage.py", "runserver"])
+    server_process = subprocess.Popen(
+        ["python", "src/manage.py", "runserver"],
+        stdout=DEVNULL,
+        stderr=DEVNULL,
+    )
 
-    while True:
-        time.sleep(1)
-        response = requests.get(f"{HOST}/utils/ready")
-        if response.status_code == 200:
-            break
+    try:
+        response = requests.get(f"{HOST}/utils/ready", timeout=200)
+        if 200 < response.status_code >= 300:
+            raise Exception("Bad status code")
+    except Exception as error:
+        pytest.exit(str(error), returncode=1)
 
 
 def pytest_sessionfinish(session, exitstatus):

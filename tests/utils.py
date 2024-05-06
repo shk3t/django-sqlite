@@ -5,6 +5,8 @@ from pathlib import Path
 import django
 
 HOST = "http://localhost:8223"
+DEVNULL = open(os.devnull, "w")
+DEFAULT_STDOUT = sys.stdout
 
 
 def change_import_dir(path):
