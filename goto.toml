@@ -22,4 +22,4 @@ files = ["main/views.py"]
 name = "models and crud"
 description = """Implement models then implement CRUD.
                  Easy."""
-files = {models = "main/models.py", crud = "main/views.py"}
+files = {models = "main/models.py", views = "main/views.py"}

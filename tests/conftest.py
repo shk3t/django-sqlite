@@ -23,7 +23,9 @@ def pytest_sessionstart(session):
         stderr=DEVNULL,
     )
     subprocess.run(
-        ["python", "src/manage.py", "migrate"], stdout=DEVNULL, stderr=DEVNULL
+        ["python", "src/manage.py", "migrate"],
+        stdout=DEVNULL,
+        stderr=DEVNULL,
     )
 
     server_process = subprocess.Popen(
@@ -32,12 +34,17 @@ def pytest_sessionstart(session):
         stderr=DEVNULL,
     )
 
-    try:
-        response = requests.get(f"{HOST}/utils/ready", timeout=200)
-        if 200 < response.status_code >= 300:
-            raise Exception("Bad status code")
-    except Exception as error:
-        pytest.exit(str(error), returncode=1)
+    for _ in range(10):
+        time.sleep(0.2)
+        try:
+            response = requests.get(f"{HOST}/utils/ready")
+        except Exception:
+            pass
+        else:
+            if response.status_code == 200:
+                break
+    else:
+        pytest.exit("Failed to establish a new connection", returncode=1)
 
 
 def pytest_sessionfinish(session, exitstatus):
