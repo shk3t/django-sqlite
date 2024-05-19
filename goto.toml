@@ -1,11 +1,11 @@
 name = "Todos"
 language = "python"
 modules = ["django"]
-failkeywords = ["failed"]
 
 containerization = "docker"
 srcdir = "src"
 stubdir = "stubs"
+failkeywords = ["failed"]
 
 [[tasks]]
 name = "models"
